@@ -1,5 +1,5 @@
 # less-toggles-mixin [![Build Status](https://travis-ci.org/justlep/less-toggles-mixin.svg?branch=master)](https://travis-ci.org/justlep/less-toggles-mixin)
-A LESS mixin for nice-looking toggles instead of default browser checkboxes.  
+Two LESS mixins for nice-looking toggles instead of default browser checkboxes.
 Inspired originally by http://callmenick.com/_development/css-toggle-switch/
 
 [Live Demo](http://justlep.github.io/less-toggles-mixin/)
