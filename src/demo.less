@@ -1,0 +1,25 @@
+@import (reference) "toggles-mixin";
+
+.roundToggle {
+    .createRoundToggle();
+
+    + label {
+        padding-right: 10px;
+
+        &:last-child {
+            padding-right: 0;
+        }
+    }
+}
+
+.bigRoundToggle {
+    .createRoundToggle(@width: 120px);
+}
+
+.roundInsetToggle {
+    .createRoundInsetToggle();
+}
+
+.bigRoundInsetToggle {
+    .createRoundInsetToggle(@width: 120px, @colorOn: #ffb94b, @borderWidth: 2px);
+}

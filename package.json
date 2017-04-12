@@ -1,0 +1,25 @@
+{
+  "name": "less-toggles-mixin",
+  "version": "1.0.0",
+  "description": "A LESS mixin for nice-looking toggles instead of default browser checkboxes.",
+  "main": "src/toggles-mixin.less",
+  "scripts": {
+    "test": "lessc src/demo.less docs/demo.min.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justlep/less-toggles-mixin.git"
+  },
+  "keywords": [
+    "less",
+    "mixin",
+    "input",
+    "checkbox",
+    "css"
+  ],
+  "author": "Lennart Pegel <github@justlep.net>",
+  "license": "MIT",
+  "devDependencies": {
+    "less": "~2.7.2"
+  }
+}

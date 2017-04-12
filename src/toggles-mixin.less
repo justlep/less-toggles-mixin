@@ -1,0 +1,169 @@
+/**
+ *   LESS-Mixin for generating CSS classes for fancy toggled switches.
+ *   Originally inspired by http://callmenick.com/_development/css-toggle-switch/
+ *
+ *   Sources on Github: https://github.com/justlep/less-toggles-mixin.git
+ *
+ *   Example:
+ *
+ *   - styles.less:
+ *
+ *      .toggle__round {
+ *        .createRoundToggle(@width: 60px)
+ *      }
+ *      .toggle__roundInset {
+ *        .createRoundInsetToggle (@width: 60px)
+ *      }
+ *
+ *   - index.html
+ *
+ *     <span class="toggle__round">
+ *       <input type="checkbox" id="cb1"/>
+ *       <label for="cb1"><!-- This label MUST be empty --></label>
+ *     </span>
+ *
+ *     <span class="toggle__roundInset">
+ *       <input type="checkbox" id="cb2">
+ *       <label for="cb2"></label>
+ *     </span>
+ *     <label for="cb2"> The visible label for checkbox 2 </label>
+*/
+
+.baseToggle(@wrapClassWidth: auto) {
+    display: inline-block !important;
+    width: @wrapClassWidth;
+    vertical-align: middle;
+    overflow: hidden;
+
+    &, *, + label {
+        box-sizing: border-box;
+        user-select: none;
+    }
+
+    > label {
+        display: block !important;
+        position: relative;
+        cursor: pointer;
+        outline: none;
+        user-select: none;
+    }
+
+    > input {
+        position: absolute;
+        margin-left: -9999px;
+        visibility: hidden;
+
+        &:disabled +label {
+            opacity: 0.5;
+            filter: grayscale(70%);
+        }
+    }
+}
+
+.createRoundToggle(@width:40px, @bgColorOn: #8ce196, @borderColor: #ccc, @rightMargin: 5px) {
+    .baseToggle(@wrapClassWidth: (@width + @rightMargin));
+
+    @height: (@width / 2);
+    @animationTime: 0.15s;
+    @shadowSize: 10px;
+    @smallerShadowThresholdWidth: 50px;
+
+    > label {
+        padding: 2px;
+        width: @width;
+        height: @height;
+        background-color: @borderColor;
+        border-radius: @height;
+
+        &:before, &:after {
+            display: block;
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            bottom: 1px;
+            content: '';
+        }
+
+        &:before {
+            right: 1px;
+            background-color: #f1f1f1;
+            border-radius: @height;
+            transition: background @animationTime;
+        }
+
+        &:after {
+            width: (@height - 2px);
+            background-color: #fff;
+            border-radius: 100%;
+            transition: margin @animationTime;
+            & when (@height > @smallerShadowThresholdWidth) {
+                box-shadow:  0 2px 5px rgba(0, 0, 0, 0.3);
+            }
+            & when (@height <= @smallerShadowThresholdWidth) {
+                box-shadow:  0 1px 2px rgba(0, 0, 0, 0.3);
+            }
+        }
+    }
+
+    > input:checked + label {
+        &:before {
+            background-color: @bgColorOn;
+        }
+        &:after {
+            margin-left: @height;
+        }
+    }
+}
+
+.createRoundInsetToggle(@width:40px, @colorOn: #8ce196, @colorOff:  #ccc, @flatBackground: #fff, @borderWidth: 2px, @rightMargin: 5px) {
+    .baseToggle(@wrapClassWidth: (@width + @rightMargin));
+
+    @height: (@width / 2);
+    @animationTime: 0.15s;
+
+    > label {
+        padding: @borderWidth;
+        width: @width;
+        height: @height;
+        background-color: @colorOff;
+        border-radius: @height;
+        transition: background @animationTime;
+
+        &:before, &:after {
+            display: block;
+            position: absolute;
+            content: '';
+        }
+
+        &:before {
+            top: @borderWidth;
+            left: @borderWidth;
+            bottom: @borderWidth;
+            right: @borderWidth;
+            border-radius: @height;
+            background-color: @flatBackground;
+            transition: background @animationTime;
+        }
+
+        &:after {
+            @innerPadding: (2 * @borderWidth);
+            @size: (@height - (2 * @innerPadding));
+            top: @innerPadding;
+            left: @innerPadding;
+            bottom: @innerPadding;
+            width: @size;
+            border-radius: @size;
+            background-color: @colorOff;
+            transition: margin @animationTime, background @animationTime;
+        }
+    }
+
+    > input:checked + label {
+        background-color: @colorOn;
+
+        &:after {
+            margin-left: @height;
+            background-color: @colorOn;
+        }
+    }
+}
