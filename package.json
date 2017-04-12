@@ -4,7 +4,7 @@
   "description": "A LESS mixin for nice-looking toggles instead of default browser checkboxes.",
   "main": "src/toggles-mixin.less",
   "scripts": {
-    "test": "lessc src/demo.less docs/demo.min.css"
+    "test": "lessc src/demo.less docs/demo.css"
   },
   "repository": {
     "type": "git",
